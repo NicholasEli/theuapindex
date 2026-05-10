@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const recordList = document.getElementById("record-list");
   const recordCount = document.getElementById("record-count");
   const recordFilter = document.getElementById("record-filter");
+  const debunkedOnlyToggle = document.getElementById("debunked-only");
   const recordCountLabel = document.querySelector(".record-count-label");
   const mediaCarousel = document.getElementById("media-carousel");
   const mediaPrev = document.getElementById("media-prev");
@@ -260,6 +261,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return haystack.includes(query);
   }
 
+  function hasDebunkers(record) {
+    return Array.isArray(record.debunkers) && record.debunkers.length > 0;
+  }
+
   function renderRecords(records) {
     recordCount.textContent = String(records.length);
     recordCountLabel.textContent = recordFilter.value.trim() ? "Matching" : "Loaded";
@@ -299,7 +304,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function applyFilter() {
     const query = recordFilter.value.trim().toLowerCase();
-    const filteredRecords = allRecords.filter((record) => matchesFilter(record, query));
+    const debunkedOnly = debunkedOnlyToggle?.checked;
+    const filteredRecords = allRecords.filter((record) => {
+      if (debunkedOnly && !hasDebunkers(record)) {
+        return false;
+      }
+
+      return matchesFilter(record, query);
+    });
     renderRecords(filteredRecords);
   }
 
@@ -354,6 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   recordFilter.addEventListener("input", applyFilter);
+  debunkedOnlyToggle?.addEventListener("change", applyFilter);
   function handleCardNavigation(event, selector) {
     const tagLink = event.target.closest(".record-tag");
     if (tagLink) {
