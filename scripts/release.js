@@ -55,6 +55,34 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
+  function renderDebunkers(debunkers) {
+    if (!Array.isArray(debunkers) || !debunkers.length) {
+      return "";
+    }
+
+    return `
+      <div class="detail-meta-item">
+        <p class="record-meta-label">Debunkers</p>
+        <div class="record-tag-list">
+          ${debunkers
+            .map(
+              (debunker) => `
+                <a
+                  class="record-tag"
+                  href="${escapeHtml(debunker.url)}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  ${escapeHtml(debunker.name)}
+                </a>
+              `
+            )
+            .join("")}
+        </div>
+      </div>
+    `;
+  }
+
   function renderPreview(record) {
     const extension = getFileExtension(record);
     const url = record.official_url;
@@ -131,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderMeta("Incident Date", record.incident_date),
         renderMeta("Incident Location", record.incident_location),
         renderMeta("Official URL", record.official_url, true),
+        renderDebunkers(record.debunkers),
       ].join("");
       detailPreview.innerHTML = renderPreview(record);
 

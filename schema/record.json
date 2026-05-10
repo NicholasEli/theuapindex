@@ -49,6 +49,24 @@
       "type": "string",
       "minLength": 1
     },
+    "debunkers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "url"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    },
     "official_url": {
       "type": "string",
       "format": "uri"

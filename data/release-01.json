@@ -1042,7 +1042,13 @@
     "agency": "Department of War",
     "incident_date": "N/A",
     "incident_location": "Middle East",
-    "official_url": "https://d34w7g4gy10iej.cloudfront.net/video/2605/DOD_111689051/DOD_111689051.mp4"
+    "official_url": "https://d34w7g4gy10iej.cloudfront.net/video/2605/DOD_111689051/DOD_111689051.mp4",
+    "debunkers": [
+      {
+        "name": "Mick West",
+        "url": "https://x.com/MickWest/status/2052736482583191778"
+      }
+    ]
   },
   {
     "uuid": "2c22fe3b-1ca6-45ef-8e82-9acdf13e5071",

@@ -38,6 +38,31 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
+  function renderDebunkerTags(record) {
+    if (!Array.isArray(record.debunkers) || !record.debunkers.length) {
+      return "";
+    }
+
+    return `
+      <div class="record-tag-list preview-tag-list">
+        ${record.debunkers
+          .map(
+            (debunker) => `
+              <a
+                class="record-tag"
+                href="${escapeHtml(debunker.url)}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ${escapeHtml(debunker.name)}
+              </a>
+            `
+          )
+          .join("")}
+      </div>
+    `;
+  }
+
   function getFileExtension(record) {
     const fromFileName = String(record.file_name || "").split(".").pop();
     return fromFileName ? fromFileName.toLowerCase() : "";
@@ -87,8 +112,14 @@ document.addEventListener("DOMContentLoaded", () => {
     )}&id=${encodeURIComponent(record.uuid)}`;
 
     return `
-      <a class="media-card" href="${detailHref}">
+      <article
+        class="callout media-card media-card-link"
+        data-href="${detailHref}"
+        role="link"
+        tabindex="0"
+      >
         <div class="media-card-preview">
+          ${renderDebunkerTags(record)}
           ${renderMediaPreview(record)}
         </div>
         <div class="media-card-body">
@@ -99,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <p class="media-card-description">${escapeHtml(record.description)}</p>
         </div>
-      </a>
+      </article>
     `;
   }
 
@@ -110,18 +141,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const detailHref = `release.html?version=${encodeURIComponent(
       record.release_version
     )}&id=${encodeURIComponent(record.uuid)}`;
+    const hasDebunkers = Array.isArray(record.debunkers) && record.debunkers.length > 0;
+    const hasRecordPreview = isMediaRecord(record) || hasDebunkers;
+    const previewMarkup = hasRecordPreview
+      ? `
+        <div class="record-card-preview">
+          ${renderDebunkerTags(record)}
+          ${renderMediaPreview(record)}
+        </div>
+      `
+      : "";
 
     return `
       <div class="cell">
-        <a class="record-link" href="${detailHref}">
-          <article class="callout record-card">
+          <article
+            class="callout record-card record-card-link"
+            data-href="${detailHref}"
+            role="link"
+            tabindex="0"
+          >
+            ${previewMarkup}
             <h3 class="record-file">${escapeHtml(record.file_name)}</h3>
             <div class="record-meta">
               ${metaMarkup}
             </div>
             <p class="record-description">${escapeHtml(record.description)}</p>
           </article>
-        </a>
       </div>
     `;
   }
@@ -139,6 +184,9 @@ document.addEventListener("DOMContentLoaded", () => {
       record.incident_date,
       record.incident_location,
       record.description,
+      ...(Array.isArray(record.debunkers)
+        ? record.debunkers.map((debunker) => debunker.name)
+        : []),
     ]
       .join(" ")
       .toLowerCase();
@@ -215,6 +263,43 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   recordFilter.addEventListener("input", applyFilter);
+  function handleCardNavigation(event, selector) {
+    const tagLink = event.target.closest(".record-tag");
+    if (tagLink) {
+      event.stopPropagation();
+      return;
+    }
+
+    const card = event.target.closest(selector);
+    if (card?.dataset.href) {
+      window.location.href = card.dataset.href;
+    }
+  }
+
+  function handleCardKeydown(event, selector) {
+    const card = event.target.closest(selector);
+    if (!card?.dataset.href) {
+      return;
+    }
+
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      window.location.href = card.dataset.href;
+    }
+  }
+
+  recordList.addEventListener("click", (event) => {
+    handleCardNavigation(event, ".record-card-link");
+  });
+  recordList.addEventListener("keydown", (event) => {
+    handleCardKeydown(event, ".record-card-link");
+  });
+  mediaCarousel.addEventListener("click", (event) => {
+    handleCardNavigation(event, ".media-card-link");
+  });
+  mediaCarousel.addEventListener("keydown", (event) => {
+    handleCardKeydown(event, ".media-card-link");
+  });
   mediaPrev.addEventListener("click", () => {
     mediaCarousel.scrollBy({ left: -420, behavior: "smooth" });
   });
