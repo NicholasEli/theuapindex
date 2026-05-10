@@ -1158,7 +1158,13 @@
     "agency": "Department of War",
     "incident_date": "N/A",
     "incident_location": "Indo-PACOM",
-    "official_url": "https://d34w7g4gy10iej.cloudfront.net/video/2605/DOD_111689167/DOD_111689167.mp4"
+    "official_url": "https://d34w7g4gy10iej.cloudfront.net/video/2605/DOD_111689167/DOD_111689167.mp4",
+    "debunkers": [
+      {
+        "name": "Mick West",
+        "url": "http://youtube.com/watch?v=Xn9G1TEEqFE"
+      }
+    ]
   },
   {
     "uuid": "13157833-4a5b-476a-af45-fd0a3be8fe73",

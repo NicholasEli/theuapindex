@@ -171,21 +171,83 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
+  function buildDateTokens(value) {
+    const normalized = String(value ?? "").trim();
+    if (!normalized) {
+      return [];
+    }
+
+    const tokens = [normalized];
+    const isoMatch = normalized.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (isoMatch) {
+      tokens.push(isoMatch[1], `${isoMatch[1]}-${isoMatch[2]}`);
+    }
+
+    return tokens;
+  }
+
+  function buildFileTypeTokens(record) {
+    const extension = getFileExtension(record);
+    if (!extension) {
+      return [];
+    }
+
+    const tokens = [extension];
+    if (extension === "pdf") {
+      tokens.push("document");
+    }
+    if (["jpg", "jpeg", "png", "gif", "webp", "avif", "svg"].includes(extension)) {
+      tokens.push("image", "photo", "media");
+    }
+    if (["mp4", "webm", "ogg", "mov", "m4v"].includes(extension)) {
+      tokens.push("video", "media", "non-pdf");
+    }
+
+    return tokens;
+  }
+
+  function buildSynonymTokens(record) {
+    const tokens = ["uap", "ufo"];
+    const agency = String(record.agency ?? "").toLowerCase();
+    const description = String(record.description ?? "").toLowerCase();
+
+    if (agency.includes("department of war")) {
+      tokens.push("dod", "dow");
+    }
+    if (agency.includes("fbi")) {
+      tokens.push("federal bureau of investigation");
+    }
+    if (description.includes("infrared")) {
+      tokens.push("ir");
+    }
+    if (Array.isArray(record.debunkers) && record.debunkers.length) {
+      tokens.push("debunked", "debunker");
+    }
+    if (isMediaRecord(record)) {
+      tokens.push("media");
+    }
+
+    return tokens;
+  }
+
   function matchesFilter(record, query) {
     if (!query) {
       return true;
     }
 
     const haystack = [
+      record.uuid,
       record.file_name,
       record.release_version,
       record.agency,
-      record.release_date,
-      record.incident_date,
+      ...buildDateTokens(record.release_date),
+      ...buildDateTokens(record.incident_date),
       record.incident_location,
       record.description,
+      ...buildFileTypeTokens(record),
+      ...buildSynonymTokens(record),
       ...(Array.isArray(record.debunkers)
-        ? record.debunkers.map((debunker) => debunker.name)
+        ? record.debunkers.flatMap((debunker) => [debunker.name, debunker.url])
         : []),
     ]
       .join(" ")
