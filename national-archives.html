@@ -3,23 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Open UAP Index</title>
+    <title>National Archives | Open UAP Index</title>
     <meta
       name="description"
-      content="A searchable index for UAP and UFO records, releases, and source material."
+      content="A searchable index of UAP-related photograph records from the National Archives."
     />
     <meta name="theme-color" content="#06101a" />
     <meta name="robots" content="index,follow" />
-    <link rel="canonical" href="https://nicholaseli.github.io/theuapindex/" />
+    <link rel="canonical" href="https://nicholaseli.github.io/theuapindex/national-archives.html" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Open UAP Index" />
-    <meta property="og:title" content="Open UAP Index" />
+    <meta property="og:title" content="National Archives | Open UAP Index" />
     <meta
       property="og:description"
-      content="A searchable index for UAP and UFO records, releases, and source material."
+      content="A searchable index of UAP-related photograph records from the National Archives."
     />
-    <meta property="og:url" content="https://nicholaseli.github.io/theuapindex/" />
+    <meta
+      property="og:url"
+      content="https://nicholaseli.github.io/theuapindex/national-archives.html"
+    />
     <meta
       property="og:image"
       content="https://nicholaseli.github.io/theuapindex/assets/uap-bg.webp"
@@ -27,10 +30,10 @@
     <meta property="og:image:alt" content="Open UAP Index default share image" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Open UAP Index" />
+    <meta name="twitter:title" content="National Archives | Open UAP Index" />
     <meta
       name="twitter:description"
-      content="A searchable index for UAP and UFO records, releases, and source material."
+      content="A searchable index of UAP-related photograph records from the National Archives."
     />
     <meta
       name="twitter:image"
@@ -48,20 +51,20 @@
       <div class="grid-container">
         <div class="grid-x grid-padding-x align-middle">
           <div class="cell large-8">
-            <p class="eyebrow">Release Archive</p>
-            <h1>Open UAP Index</h1>
+            <p class="eyebrow">National Archives</p>
+            <h1>Photographs</h1>
             <p class="lead">
-              A static archive for official UAP and UFO releases, records, and source material
-              published for public review.
+              A searchable mirror of UAP-related photograph records published by the U.S. National
+              Archives and Records Administration.
             </p>
           </div>
           <div class="cell large-4">
             <div class="callout stats-panel">
-              <p class="stats-label">Current Release</p>
-              <p class="stats-value">Release 01</p>
+              <p class="stats-label">Source</p>
+              <p class="stats-value">NARA</p>
               <p class="stats-copy">
-                Records load from the local JSON dataset and render as a static GitHub
-                Pages-friendly index.
+                Records load from a local scrape of the National Archives UAP photographs page and
+                link back to the official catalog entries.
               </p>
             </div>
           </div>
@@ -72,8 +75,8 @@
     <nav class="site-nav" aria-label="Primary">
       <div class="grid-container">
         <ul class="menu align-center site-nav-menu">
-          <li><a class="is-active" href="index.html" aria-current="page">Home</a></li>
-          <li><a href="national-archives.html">National Archives</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a class="is-active" href="national-archives.html" aria-current="page">National Archives</a></li>
         </ul>
       </div>
     </nav>
@@ -85,7 +88,7 @@
             <div class="section-heading media-heading">
               <div>
                 <p class="section-kicker">Featured Media</p>
-                <h2>Images & Videos</h2>
+                <h2>Images & Photos</h2>
               </div>
               <div class="carousel-controls">
                 <button
@@ -119,7 +122,7 @@
             <div class="section-heading">
               <div>
                 <p class="section-kicker">Records</p>
-                <h2>Release 01</h2>
+                <h2>National Archives Photographs</h2>
               </div>
               <div class="record-count-wrap">
                 <span class="record-count-label">Loaded</span>
@@ -134,7 +137,7 @@
                 id="record-filter"
                 class="filter-input"
                 type="search"
-                placeholder="Search by file name, agency, release version, date, location, or description"
+                placeholder="Search by title, record group, series, catalog id, date, or source"
               />
             </div>
           </div>
@@ -148,6 +151,6 @@
       </section>
     </main>
 
-    <script src="scripts/main.js"></script>
+    <script src="scripts/national-archives.js"></script>
   </body>
 </html>
