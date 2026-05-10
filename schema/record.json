@@ -6,6 +6,7 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
+    "uuid",
     "description",
     "file_name",
     "release_date",
@@ -16,6 +17,10 @@
     "official_url"
   ],
   "properties": {
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
     "description": {
       "type": "string",
       "minLength": 1
@@ -38,7 +43,7 @@
     },
     "incident_date": {
       "type": "string",
-      "format": "date"
+      "minLength": 1
     },
     "incident_location": {
       "type": "string",

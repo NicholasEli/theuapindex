@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,27 +15,96 @@
     <link rel="stylesheet" href="styles/main.css" />
   </head>
   <body>
-    <header class="grid-container">
-      <div class="grid-x grid-padding-x align-middle">
-        <div class="cell">
-          <h1>The UAP Index</h1>
-          <p class="lead">
-            A static archive for official UAP and UFO releases, documents, and
-            source material.
-          </p>
+    <header class="site-header">
+      <div class="grid-container">
+        <div class="grid-x grid-padding-x align-middle">
+          <div class="cell large-8">
+            <p class="eyebrow">Release Archive</p>
+            <h1>The UAP Index</h1>
+            <p class="lead">
+              A static archive for official UAP and UFO releases, records, and source material
+              published for public review.
+            </p>
+          </div>
+          <div class="cell large-4">
+            <div class="callout stats-panel">
+              <p class="stats-label">Current Release</p>
+              <p class="stats-value">Release 01</p>
+              <p class="stats-copy">
+                Records load from the local JSON dataset and render as a static GitHub
+                Pages-friendly index.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </header>
 
-    <main class="grid-container">
-      <section class="grid-x grid-padding-x">
-        <div class="cell medium-8 large-7">
-          <div class="callout primary">
-            <h2>Project Scaffold Ready</h2>
-            <p>
-              Foundation CSS is loaded. Data, asset, script, and style
-              directories are in place for the next phase of the build.
-            </p>
+    <main class="site-main">
+      <section class="grid-container media-section">
+        <div class="grid-x grid-padding-x">
+          <div class="cell">
+            <div class="section-heading media-heading">
+              <div>
+                <p class="section-kicker">Featured Media</p>
+                <h2>Images & Videos</h2>
+              </div>
+              <div class="carousel-controls">
+                <button
+                  id="media-prev"
+                  class="button hollow carousel-button"
+                  type="button"
+                  aria-label="Previous media cards"
+                >
+                  Prev
+                </button>
+                <button
+                  id="media-next"
+                  class="button hollow carousel-button"
+                  type="button"
+                  aria-label="Next media cards"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="cell">
+            <div id="media-carousel" class="media-carousel"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid-container">
+        <div class="grid-x grid-padding-x">
+          <div class="cell">
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">Records</p>
+                <h2>Release 01</h2>
+              </div>
+              <div class="record-count-wrap">
+                <span class="record-count-label">Loaded</span>
+                <strong id="record-count" class="record-count-value">0</strong>
+              </div>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="filter-bar">
+              <label class="filter-label" for="record-filter">Filter Records</label>
+              <input
+                id="record-filter"
+                class="filter-input"
+                type="search"
+                placeholder="Search by file name, agency, release version, date, location, or description"
+              />
+            </div>
+          </div>
+          <div class="cell">
+            <div
+              id="record-list"
+              class="grid-x grid-padding-x small-up-1 medium-up-2 large-up-3"
+            ></div>
           </div>
         </div>
       </section>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Release Record | The UAP Index</title>
+    <meta
+      name="description"
+      content="Detailed view for a UAP release record in The UAP Index."
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <header class="site-header detail-header">
+      <div class="grid-container">
+        <div class="grid-x grid-padding-x align-middle">
+          <div class="cell large-8">
+            <p class="eyebrow">Record Detail</p>
+            <h1 class="detail-title">Release Record</h1>
+            <p class="lead">
+              A full record view with metadata and source preview when the file
+              is directly embeddable.
+            </p>
+          </div>
+          <div class="cell large-4">
+            <div class="callout stats-panel">
+              <p class="stats-label">Jump Back</p>
+              <p class="stats-copy">
+                <a class="detail-back-link" href="index.html">Return to the release index</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <section class="grid-container">
+        <div class="grid-x grid-padding-x">
+          <div class="cell">
+            <div id="detail-status" class="callout secondary status-message">
+              Loading record...
+            </div>
+          </div>
+          <div id="detail-view" class="cell" hidden>
+            <div class="grid-x grid-padding-x">
+              <div class="cell large-7">
+                <article class="callout detail-panel">
+                  <p class="section-kicker" id="detail-version-kicker">Release</p>
+                  <h2 id="detail-file-name" class="detail-file-name"></h2>
+                  <p id="detail-description" class="detail-description"></p>
+                  <div id="detail-preview" class="detail-preview-wrap"></div>
+                </article>
+              </div>
+              <div class="cell large-5">
+                <aside class="callout detail-panel detail-meta-panel">
+                  <h3 class="detail-meta-heading">Record Metadata</h3>
+                  <div id="detail-meta" class="detail-meta-grid"></div>
+                </aside>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="scripts/release.js"></script>
+  </body>
+</html>
