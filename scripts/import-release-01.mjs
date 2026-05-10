@@ -1,7 +1,5 @@
-import { createWriteStream } from "node:fs";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { Readable } from "node:stream";
 
 const RELEASE_VERSION = "release-01";
 const CSV_URL = "https://www.war.gov/Portals/1/Interactive/2026/UFO/uap-csv.csv";
@@ -9,7 +7,6 @@ const DVIDS_API_KEY = "key-68bb60d16b35e";
 
 const ROOT_DIR = process.cwd();
 const DATA_DIR = path.join(ROOT_DIR, "data");
-const FILES_DIR = path.join(ROOT_DIR, "files", RELEASE_VERSION);
 const OUTPUT_JSON = path.join(DATA_DIR, `${RELEASE_VERSION}.json`);
 
 function parseCSV(csvText) {
@@ -163,33 +160,8 @@ async function resolveVideoAsset(videoId) {
   };
 }
 
-async function downloadFile(url, destinationPath) {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to download ${url}: ${response.status} ${response.statusText}`);
-  }
-
-  if (!response.body) {
-    throw new Error(`No response body for ${url}`);
-  }
-
-  const tempPath = `${destinationPath}.part`;
-  const stream = createWriteStream(tempPath);
-  const readable = Readable.fromWeb(response.body);
-
-  await new Promise((resolve, reject) => {
-    readable.pipe(stream);
-    readable.on("error", reject);
-    stream.on("error", reject);
-    stream.on("finish", resolve);
-  });
-
-  await fs.rename(tempPath, destinationPath);
-}
-
 async function main() {
   await fs.mkdir(DATA_DIR, { recursive: true });
-  await fs.mkdir(FILES_DIR, { recursive: true });
 
   const csvText = await fetchText(CSV_URL);
   const rows = parseCSV(csvText);
@@ -230,15 +202,6 @@ async function main() {
 
     const fallbackBase = safeFileBase(title || `record_${String(i + 1).padStart(3, "0")}`);
     const fileName = fileNameFromUrl(assetUrl || officialUrl, fallbackBase);
-    const destinationPath = path.join(FILES_DIR, fileName);
-
-    if (assetUrl) {
-      try {
-        await fs.access(destinationPath);
-      } catch {
-        await downloadFile(assetUrl, destinationPath);
-      }
-    }
 
     output.push({
       description,
