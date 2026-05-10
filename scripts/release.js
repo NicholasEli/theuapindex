@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      document.title = `${record.file_name} | The UAP Index`;
+      document.title = `${record.file_name} | Open UAP Index`;
       detailVersionKicker.textContent = record.release_version;
       detailFileName.textContent = record.file_name;
       detailDescription.textContent = record.description;
