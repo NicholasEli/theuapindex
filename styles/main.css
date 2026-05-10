@@ -159,6 +159,8 @@ h2 {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(18rem, 24rem);
+  grid-auto-rows: max-content;
+  align-items: start;
   gap: 1rem;
   overflow-x: auto;
   padding-bottom: 0.5rem;
@@ -179,7 +181,8 @@ h2 {
 .media-card:visited {
   position: relative;
   display: flex;
-  min-height: 100%;
+  height: auto;
+  align-self: start;
   flex-direction: column;
   border: 1px solid rgba(143, 211, 255, 0.14);
   border-radius: 1.2rem;
@@ -588,6 +591,13 @@ h2 {
 
   .media-carousel {
     grid-auto-columns: minmax(16rem, 88vw);
+    grid-auto-rows: max-content;
+    align-items: start;
+  }
+
+  .media-card,
+  .media-card:visited {
+    min-height: 0;
   }
 
   .media-card-meta {
