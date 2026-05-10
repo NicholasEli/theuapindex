@@ -92,6 +92,12 @@ a:focus {
   color: #ffffff;
 }
 
+.site-nav-icon {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+}
+
 .site-nav-menu a.is-active,
 .site-nav-menu a[aria-current="page"] {
   border-color: rgba(143, 211, 255, 0.22);
