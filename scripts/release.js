@@ -94,6 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
             class="detail-image"
             src="${escapeHtml(url)}"
             alt="${escapeHtml(record.file_name)}"
+            loading="lazy"
+            decoding="async"
           />
         </figure>
       `;
@@ -101,8 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (isVideoExtension(extension)) {
       return `
-        <div class="detail-preview-card">
-          <video class="detail-video" controls preload="metadata">
+        <div class="detail-preview-card video-shell is-loading">
+          <div class="video-spinner" aria-hidden="true"></div>
+          <video class="detail-video" controls>
             <source src="${escapeHtml(url)}" />
             Your browser does not support embedded video playback.
           </video>
@@ -162,6 +165,20 @@ document.addEventListener("DOMContentLoaded", () => {
         renderDebunkers(record.debunkers),
       ].join("");
       detailPreview.innerHTML = renderPreview(record);
+      const previewVideo = detailPreview.querySelector(".video-shell video");
+      if (previewVideo) {
+        const shell = previewVideo.closest(".video-shell");
+        const resolveLoading = () => {
+          shell?.classList.remove("is-loading");
+        };
+
+        if (previewVideo.readyState >= 2) {
+          resolveLoading();
+        } else {
+          previewVideo.addEventListener("loadeddata", resolveLoading, { once: true });
+          previewVideo.addEventListener("error", resolveLoading, { once: true });
+        }
+      }
 
       detailStatus.hidden = true;
       detailView.hidden = false;

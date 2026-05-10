@@ -1604,7 +1604,13 @@
     "agency": "NASA",
     "incident_date": "1969",
     "incident_location": "Moon",
-    "official_url": "https://www.war.gov/medialink/ufo/release_1/nasa-uap-vm1-apollo-12-1969.jpg"
+    "official_url": "https://www.war.gov/medialink/ufo/release_1/nasa-uap-vm1-apollo-12-1969.jpg",
+    "debunkers": [
+      {
+        "name": "ufoofinterest",
+        "url": "https://x.com/ufoofinterest/status/2053349716730003558?s=20"
+      }
+    ]
   },
   {
     "uuid": "3b7947b3-428f-4699-a113-0f1e89ff060d",
@@ -1615,7 +1621,13 @@
     "agency": "NASA",
     "incident_date": "1969",
     "incident_location": "Moon",
-    "official_url": "https://www.war.gov/medialink/ufo/release_1/nasa-uap-vm2-apollo-12-1969.jpg"
+    "official_url": "https://www.war.gov/medialink/ufo/release_1/nasa-uap-vm2-apollo-12-1969.jpg",
+    "debunkers": [
+      {
+        "name": "ufoofinterest",
+        "url": "https://x.com/ufoofinterest/status/2053349716730003558?s=20"
+      }
+    ]
   },
   {
     "uuid": "2c52a751-7028-4704-8fda-ce86634cef9f",
@@ -1626,7 +1638,13 @@
     "agency": "NASA",
     "incident_date": "1969",
     "incident_location": "Moon",
-    "official_url": "https://www.war.gov/medialink/ufo/release_1/nasa-uap-vm3-apollo-12-1969.jpg"
+    "official_url": "https://www.war.gov/medialink/ufo/release_1/nasa-uap-vm3-apollo-12-1969.jpg",
+    "debunkers": [
+      {
+        "name": "ufoofinterest",
+        "url": "https://x.com/ufoofinterest/status/2053349716730003558?s=20"
+      }
+    ]
   },
   {
     "uuid": "55f55016-0c56-4273-b904-42bc27e3ffa7",
@@ -1637,7 +1655,13 @@
     "agency": "NASA",
     "incident_date": "1969",
     "incident_location": "Moon",
-    "official_url": "https://www.war.gov/medialink/ufo/release_1/nasa-uap-vm4-apollo-12-1969.jpg"
+    "official_url": "https://www.war.gov/medialink/ufo/release_1/nasa-uap-vm4-apollo-12-1969.jpg",
+    "debunkers": [
+      {
+        "name": "ufoofinterest",
+        "url": "https://x.com/ufoofinterest/status/2053349716730003558?s=20"
+      }
+    ]
   },
   {
     "uuid": "83eab2eb-9db7-4b9b-87ba-942809297130",
@@ -1648,7 +1672,13 @@
     "agency": "NASA",
     "incident_date": "1969",
     "incident_location": "Moon",
-    "official_url": "https://www.war.gov/medialink/ufo/release_1/nasa-uap-vm5-apollo-12-1969.jpg"
+    "official_url": "https://www.war.gov/medialink/ufo/release_1/nasa-uap-vm5-apollo-12-1969.jpg",
+    "debunkers": [
+      {
+        "name": "ufoofinterest",
+        "url": "https://x.com/ufoofinterest/status/2053349716730003558?s=20"
+      }
+    ]
   },
   {
     "uuid": "80858aca-9a7f-43db-a9bb-151a8cc4d272",
@@ -1659,7 +1689,13 @@
     "agency": "NASA",
     "incident_date": "1972",
     "incident_location": "Moon",
-    "official_url": "https://www.war.gov/medialink/ufo/release_1/nasa-uap-vm6-apollo-17-1972.jpg"
+    "official_url": "https://www.war.gov/medialink/ufo/release_1/nasa-uap-vm6-apollo-17-1972.jpg",
+    "debunkers": [
+      {
+        "name": "ufoofinterest",
+        "url": "https://x.com/ufoofinterest/status/2053349716730003558?s=20"
+      }
+    ]
   },
   {
     "uuid": "b3e81ce1-6bea-46a1-8198-7796ccc17c8a",

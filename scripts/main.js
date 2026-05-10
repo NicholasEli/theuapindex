@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                ${escapeHtml(debunker.name)}
+                Debunked
               </a>
             `
           )
@@ -91,15 +91,19 @@ document.addEventListener("DOMContentLoaded", () => {
           src="${escapeHtml(record.official_url)}"
           alt="${escapeHtml(record.file_name)}"
           loading="lazy"
+          decoding="async"
         />
       `;
     }
 
     if (isVideoExtension(extension)) {
       return `
-        <video class="media-card-video" preload="metadata" muted playsinline>
-          <source src="${escapeHtml(record.official_url)}" />
-        </video>
+        <div class="video-shell is-loading">
+          <div class="video-spinner" aria-hidden="true"></div>
+          <video class="media-card-video" muted playsinline>
+            <source src="${escapeHtml(record.official_url)}" />
+          </video>
+        </div>
       `;
     }
 
@@ -299,6 +303,29 @@ document.addEventListener("DOMContentLoaded", () => {
     renderRecords(filteredRecords);
   }
 
+  function initializeVideoLoading(scope = document) {
+    const videos = scope.querySelectorAll(".video-shell video");
+    for (const video of videos) {
+      const shell = video.closest(".video-shell");
+      if (!shell || video.dataset.loadingBound === "true") {
+        continue;
+      }
+
+      video.dataset.loadingBound = "true";
+      const resolveLoading = () => {
+        shell.classList.remove("is-loading");
+      };
+
+      if (video.readyState >= 2) {
+        resolveLoading();
+        continue;
+      }
+
+      video.addEventListener("loadeddata", resolveLoading, { once: true });
+      video.addEventListener("error", resolveLoading, { once: true });
+    }
+  }
+
   async function loadRecords() {
     try {
       const response = await fetch("data/release-01.json");
@@ -309,6 +336,8 @@ document.addEventListener("DOMContentLoaded", () => {
       allRecords = await response.json();
       renderMediaCarousel(allRecords);
       renderRecords(allRecords);
+      initializeVideoLoading(recordList);
+      initializeVideoLoading(mediaCarousel);
     } catch (error) {
       recordCountLabel.textContent = "Error";
       recordCount.textContent = "0";
